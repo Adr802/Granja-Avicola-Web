@@ -1,8 +1,8 @@
-const Data = require('../models/data');
+const User = require('../models/user');
 
-const dataController = {
-    getDatas : async (req,res) => {
-        const data = await Data.find();
+const userController = {
+    getUsers : async (req,res) => {
+        const data = await User.find();
         res.json(data)
         
         /*await Data.find().then(docs => {
@@ -15,4 +15,4 @@ const dataController = {
     }
 }
 
-module.exports = dataController;
+module.exports = userController;

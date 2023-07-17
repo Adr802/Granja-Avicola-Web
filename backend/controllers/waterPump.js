@@ -1,8 +1,8 @@
-const Data = require('../models/data');
+const WaterPump = require('../models/waterPump');
 
-const dataController = {
-    getDatas : async (req,res) => {
-        const data = await Data.find();
+const waterPumpController = {
+    getEvents : async (req,res) => {
+        const data = await WaterPump.find();
         res.json(data)
         
         /*await Data.find().then(docs => {
@@ -15,4 +15,4 @@ const dataController = {
     }
 }
 
-module.exports = dataController;
+module.exports = waterPumpController;

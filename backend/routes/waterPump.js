@@ -1,7 +1,7 @@
+const waterPump = require('../controllers/waterPump');
 const express=require('express');
 const router=express.Router();
-router.get('/waterPump',(req,res) => {
-    const data= ["Hola","MUNDO WATER"]
-    res.send({data})
-});
+
+router.get('/',waterPump.getEvents);
+
 module.exports=router;
