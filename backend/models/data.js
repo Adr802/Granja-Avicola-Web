@@ -4,15 +4,15 @@ const DataScheme = new mongoose.Schema({
     temp: {
         type: Number,
     },
-    Hum:{
+    hum:{
         type: Number
     },
     waterLevel: {
         type: Number
     },
     dateHour:{
-        hour:{type:string},
-        date:{type:string}
+        hour:{type:String},
+        date:{type:String}
     }
 });
 module.exports = mongoose.model('Data', DataScheme);
