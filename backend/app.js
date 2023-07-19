@@ -1,8 +1,17 @@
 
 const express=require('express');
-const app=express();
 const {mongoose} = require('./config/database')
 const morgan=require('morgan');
+
+//requiere para obtener DATOS DEL ESP32
+const http = require('http');
+const url = require('url');
+const querystring = require('querystring');
+const fs = require('fs');
+
+//variable fecha
+const fechaHoraActual = new Date();
+
 
 //importanto modelos pruebas
 const Data = require('./models/data')
@@ -12,6 +21,10 @@ const WaterPump = require('./models/waterPump')
 //const cors = require('cors');
 
 //settings
+
+const app=express();
+
+
 app.set('nombreApp', 'Aplicacion para la gestion de una granja Avicola'); 
 app.set('puerto',process.env.PORT|| 3000);
 
@@ -27,28 +40,59 @@ app.use('/api/data',require('./routes/data'));
 app.use('/api/waterpump',require('./routes/waterPump'));
 
 
-app.listen(app.get('puerto'), ()=>{
+//funcion para obtener los datos y enviar a la base de datos
+
+// Obtener el año, el mes y el día
+const year = fechaHoraActual.getFullYear();
+const month = fechaHoraActual.getMonth() + 1; // Los meses en JavaScript son indexados desde 0 (enero) hasta 11 (diciembre)
+const day = fechaHoraActual.getDate();
+
+// Obtener las horas, minutos y segundos
+const hours = fechaHoraActual.getHours();
+const minutes = fechaHoraActual.getMinutes();
+const seconds = fechaHoraActual.getSeconds();
+
+function requestHandler(request, response) {
+  var uriData = url.parse(request.url);
+  var pathname = uriData.pathname;
+  var query = uriData.query;
+  var queryData = querystring.parse(query);
+
+  if (pathname === '/update') {
+    var newData = {
+      temp: queryData.temp,
+      hum: queryData.humd,
+      waterLevel: 15,
+      dateHour:{
+        hour : `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`,
+        date : `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`
+      }
+      
+    };
+    //base de datos
+    console.log(newData);
+
+    Data.create(newData);
+    response.end();
+  }
+}
+
+app.get('/update', requestHandler);
+const server = http.createServer(app);
+
+server.listen(app.get('puerto'), ()=>{
 
     console.log(app.get('nombreApp')); 
-    console.log('http://localhost:', app.get('puerto'));
+    console.log('http://localhost:3000');
 })
 /*
 const crearData = () =>{
-    Data.create(
-        {
-            "temp": 18.3,
-            "hum": 30,
-            "waterLevel": 50,
-            "dateHour": {
-              "hour": "10:52",
-              "date": "17/07/2023"
-            }
-          }
-    )
     console.log("Data creada?")
-};
+}
 
 crearData();
+
+
 
 const crearUser = () =>{
   User.create(
