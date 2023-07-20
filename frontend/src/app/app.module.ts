@@ -7,6 +7,8 @@ import { LoginComponent } from './login/login.component';
 import { MenuComponent } from './menu/menu.component';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
 
 const rutas: Routes= [
   { path: 'login', component: LoginComponent },
@@ -18,7 +20,9 @@ const rutas: Routes= [
     AppComponent,
     InicioComponent,
     LoginComponent,
-    MenuComponent
+    MenuComponent,
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
