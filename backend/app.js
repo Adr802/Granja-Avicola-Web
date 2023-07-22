@@ -2,12 +2,15 @@
 const express=require('express');
 const {mongoose} = require('./config/database')
 const morgan=require('morgan');
+const cors = require('cors');
 
 //requiere para obtener DATOS DEL ESP32
 const http = require('http');
 const url = require('url');
 const querystring = require('querystring');
 const fs = require('fs');
+
+
 
 //variable fecha
 const fechaHoraActual = new Date();
@@ -17,12 +20,19 @@ const fechaHoraActual = new Date();
 const Data = require('./models/data')
 const User = require('./models/user')
 const WaterPump = require('./models/waterPump')
+const app=express();
+const server = http.createServer(app);
 
-//const cors = require('cors');
+const io = require('socket.io')(server,{
+  cors: {
+    origin: "http://localhost:4200",
+    methods: ["GET", "POST"]
+  }
+  });
 
 //settings
 
-const app=express();
+
 
 
 app.set('nombreApp', 'Aplicacion para la gestion de una granja Avicola'); 
@@ -64,27 +74,37 @@ function requestHandler(request, response) {
       hum: queryData.humd,
       waterLevel: 15,
       dateHour:{
-        hour : `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`,
-        date : `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`
+        hour : `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`,
+        date : `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`
       }
       
     };
     //base de datos
     console.log(newData);
-
+    io.emit("hello from server",newData);
     Data.create(newData);
     response.end();
   }
 }
 
+io.on('connection', function(socket){
+  console.log('alguien se ha conectado con sockets');
+   // send a message to the client
+   socket.emit("hello from server", "primera hola");
+
+   // receive a message from the client
+   socket.on("hello from client", (data) => {
+     console.log("estoy recibiendo en el server: " + data)
+})
+});
 app.get('/update', requestHandler);
-const server = http.createServer(app);
 
 server.listen(app.get('puerto'), ()=>{
 
-    console.log(app.get('nombreApp')); 
-    console.log('http://localhost:3000');
+  console.log(app.get('nombreApp')); 
+  console.log('http://localhost:3000');
 })
+
 /*
 const crearData = () =>{
     console.log("Data creada?")
