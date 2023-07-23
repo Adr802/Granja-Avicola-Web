@@ -26,7 +26,7 @@ const server = http.createServer(app);
 const io = require('socket.io')(server,{
   cors: {
     origin: "http://localhost:4200",
-    methods: ["GET", "POST"]
+    methods: ["GET", "POST","PUT","DELETE"]
   }
   });
 
@@ -53,14 +53,7 @@ app.use('/api/waterpump',require('./routes/waterPump'));
 //funcion para obtener los datos y enviar a la base de datos
 
 // Obtener el año, el mes y el día
-const year = fechaHoraActual.getFullYear();
-const month = fechaHoraActual.getMonth() + 1; // Los meses en JavaScript son indexados desde 0 (enero) hasta 11 (diciembre)
-const day = fechaHoraActual.getDate();
 
-// Obtener las horas, minutos y segundos
-const hours = fechaHoraActual.getHours();
-const minutes = fechaHoraActual.getMinutes();
-const seconds = fechaHoraActual.getSeconds();
 
 function requestHandler(request, response) {
   var uriData = url.parse(request.url);
@@ -69,19 +62,28 @@ function requestHandler(request, response) {
   var queryData = querystring.parse(query);
 
   if (pathname === '/update') {
+    // Obtener la fecha y hora actual
+    const fechaHoraActual = new Date();
+    const year = fechaHoraActual.getFullYear();
+    const month = fechaHoraActual.getMonth() + 1; // Los meses en JavaScript son indexados desde 0 (enero) hasta 11 (diciembre)
+    const day = fechaHoraActual.getDate();
+    const hours = fechaHoraActual.getHours();
+    const minutes = fechaHoraActual.getMinutes();
+    const seconds = fechaHoraActual.getSeconds();
+
     var newData = {
       temp: queryData.temp,
       hum: queryData.humd,
       waterLevel: 15,
-      dateHour:{
-        hour : `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`,
-        date : `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`
+      dateHour: {
+        hour: `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`,
+        date: `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`
       }
-      
     };
+    
     //base de datos
     console.log(newData);
-    io.emit("hello from server",newData);
+    io.emit("hello from server", newData);
     Data.create(newData);
     response.end();
   }
