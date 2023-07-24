@@ -1,0 +1,47 @@
+
+  
+  #inicio {
+    text-align: center;
+  }
+  
+  /* Estilos para la tabla */
+  .table-container {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .centered-table {
+    width: 80%;
+    border-collapse: collapse;
+    border: 1px solid #ccc;
+    table-layout: fixed; /* Asegura que las celdas tengan un ancho fijo */
+  }
+  
+  .centered-table td {
+    padding: 8px;
+    border: 1px solid #ccc;
+    text-align: center;
+  }
+  
+  /* Agregar estilos de borde a la tabla */
+  .centered-table {
+    border: 2px solid #333;
+  }
+  
+  .centered-table th,
+  .centered-table td {
+    border: 1px solid #ccc;
+  }
+/* Estilos para el carrusel más pequeño */
+.carousel-sm {
+  max-width: 400px; /* Ajusta el tamaño máximo del carrusel */
+  margin: 0 auto; /* Centra el carrusel horizontalmente */
+}
+
+/* Estilos para las imágenes más pequeñas */
+.carousel-inner img {
+  max-height: 200px; /* Ajusta el tamaño máximo de altura de las imágenes */
+}
+
+  
