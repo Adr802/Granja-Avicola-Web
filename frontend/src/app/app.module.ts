@@ -10,10 +10,13 @@ import { FormsModule } from '@angular/forms';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { RegistroUsuariosComponent } from './registro-usuarios/registro-usuarios.component';
 
 const rutas: Routes= [
+  { path: 'inicio', component: InicioComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'inicio', component: InicioComponent }
+  { path: 'registro', component: RegistroUsuariosComponent },
+  {path: 'dashboard', component:DashboardComponent}
   ];
 
 @NgModule({
@@ -24,7 +27,8 @@ const rutas: Routes= [
     MenuComponent,
     HeaderComponent,
     FooterComponent,
-    DashboardComponent
+    DashboardComponent,
+    RegistroUsuariosComponent
   ],
   imports: [
     BrowserModule,
