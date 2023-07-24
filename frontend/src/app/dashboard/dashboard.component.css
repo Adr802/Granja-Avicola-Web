@@ -1,0 +1,89 @@
+
+.dashboard-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+  .left-dashboard-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .dashboard-item {
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+  }
+
+  .dashboard-item.vertical {
+    height: 558px;
+    margin-top: 42px;
+  }
+  .dashboard-item.horizontal {
+    height: 250px;
+    width: 800px;
+  }
+  .chart-container {
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Espacio entre los dos divs */
+  .left-right-margin {
+    margin-right: 20px;
+  }
+  .water-tank-container {
+    text-align: center;
+  }
+  
+  .water-tank {
+    margin-top: 69px;
+    width: 200px;
+    height: 300px;
+    background-color: #ffffff;
+    position: relative;
+    border-radius: 7px 8px 34px 33px; /* Agregar esquinas redondeadas */
+    overflow: hidden; /* Ocultar el contenido que sobresalga del div */
+  }
+  
+  .water {
+    width: 100%;
+    height: 100%;
+    background-color: rgb(64, 160, 224);
+    position: absolute;
+    bottom: 0;
+    border-radius: 0 0 34px 33px; /* Esquinas inferiores curvas */
+    animation: waterAnimation 2s infinite linear; /* Agregar la animación de agua */
+  }
+  
+  .water-level {
+    margin-top: 26px;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 25px;
+  }
+  
+  .overlay-image {
+    position: absolute;
+    top: 79.5%;
+    left: 75.8%;
+    transform: translate(-50%, -50%);
+    width: 206px;
+    height: 360px;
+    z-index: 1;
+  }
+  
+  .blank-div {
+    width: 200px; /* Ancho del div en blanco, debe ser igual al ancho del water-tank */
+    height: 20px; /* Altura del div en blanco */
+    background-color: white; /* Color de fondo blanco */
+  }
+  .water-tank-container p{
+    font-size: 25px;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-bottom: 10px;
+  }
