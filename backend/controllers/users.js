@@ -17,14 +17,15 @@ const userController = {
     addUser : async(req,res)=>{
     console.log(req.body);
 
-    const{cedula, nombre, telefono, email,password, rol} = req.body;
+    const{cedula, name, phone, rol,email,pass} = req.body;
     const newUser = new User({
                             cedula:cedula,
-                            name:nombre,
-                            phone: telefono,
+                            name:name,
+                            phone: phone,
+                            role: rol,
                             email:email,
-                            pass:password,
-                            role: rol});
+                            pass:pass
+                           });
     console.log(newUser);
     await newUser.save();
     const token = jwt.sign({ _id:newUser._id }, 'secretkey');

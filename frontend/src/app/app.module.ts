@@ -13,6 +13,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { RegistroUsuariosComponent } from './registro-usuarios/registro-usuarios.component';
 import { PrivateComponent } from './private/private.component';
 import { AuthGuard } from './auth.guard';
+import { AuthService } from './services/auth.service';
 
 const rutas: Routes= [
   { path: 'inicio', component: InicioComponent },
@@ -41,7 +42,7 @@ const rutas: Routes= [
     HttpClientModule,
     RouterModule.forRoot(rutas)
   ],
-  providers: [AuthGuard ],
+  providers: [AuthGuard,AuthService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

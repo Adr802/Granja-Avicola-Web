@@ -1,24 +1,12 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 
 const UserScheme = new mongoose.Schema({
-    cedula: {
-        type: String,
-        unique: true,
-        require: true
-    },
-    name: {
-        type: String,
-        require: true
-    },
-    phone: {
-        type: String,
-        require: true
-    },
-    role: {
-        type: ["operator", "admin"],
-        default: "operator"
-    },
-    email: { type: String, require: true, unique: true },
-    pass: { type: String, require: true }
+  cedula: { type: String, required: true },
+  name: { type: String, required: true },
+  phone: { type: String, required: true },
+  role: { type: String }, // Corregido el nombre de la propiedad aquí
+  email: { type: String, required: true },
+  pass: { type: String, required: true }
 });
+
 module.exports = mongoose.model('User', UserScheme);
