@@ -1,1 +1,6 @@
-<app-dashboard></app-dashboard>
+<div class="block" *appRole="['operator']">
+    <app-dashboard></app-dashboard>
+</div>
+<div class="block" *appRole="['admin']">
+    <app-registro-usuarios></app-registro-usuarios>
+</div>
