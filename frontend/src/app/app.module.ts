@@ -11,12 +11,16 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { RegistroUsuariosComponent } from './registro-usuarios/registro-usuarios.component';
+import { PrivateComponent } from './private/private.component';
+import { AuthGuard } from './auth.guard';
 
 const rutas: Routes= [
   { path: 'inicio', component: InicioComponent },
   { path: 'login', component: LoginComponent },
   { path: 'registro', component: RegistroUsuariosComponent },
-  {path: 'dashboard', component:DashboardComponent}
+  { path: 'private', component:PrivateComponent, canActivate: [AuthGuard]},
+  { path: '', redirectTo: '/inicio', pathMatch: 'full'},
+  { path: '**', redirectTo:'/inicio'}
   ];
 
 @NgModule({
@@ -28,7 +32,8 @@ const rutas: Routes= [
     HeaderComponent,
     FooterComponent,
     DashboardComponent,
-    RegistroUsuariosComponent
+    RegistroUsuariosComponent,
+    PrivateComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +41,7 @@ const rutas: Routes= [
     HttpClientModule,
     RouterModule.forRoot(rutas)
   ],
-  providers: [],
+  providers: [AuthGuard ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

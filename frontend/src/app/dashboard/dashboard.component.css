@@ -1,7 +1,7 @@
 .dashboard-container {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: end;
   }
   
 
@@ -21,11 +21,11 @@
   
 
   .dashboard-item.vertical {
-  height: 558px;
+  height: 580px;
   margin-top: 42px;
   }
   .dashboard-item.horizontal {
-  height: 250px;
+  height: 280px;
   width: 800px;
   }
   .chart-container {
@@ -75,8 +75,8 @@
 
   .overlay-image {
   position: absolute;
-  top: 61.5%;
-  left: 81.6%;
+  top: 66.4%;
+  left: 75.8%;
   transform: translate(-50%, -50%);
   width: 206px;
   height: 360px;
@@ -94,4 +94,11 @@
   font-weight: bold;
   font-family: Arial, Helvetica, sans-serif;
   margin-bottom: 10px;
+  }
+  #title{
+    margin: 0 auto;
+    margin-left: 500px;
+    font-size: 35px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
   }

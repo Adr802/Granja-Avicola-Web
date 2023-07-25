@@ -1,49 +1,80 @@
 #inicio {
     text-align: center;
-    }
-    
+    background-color: white;
+}
 
-    /* Estilos para la tabla */
-    .table-container {
-    margin-top: 20px;
-    display: flex;
-    justify-content: center;
-    }
-    
 
-    .centered-table {
-    width: 80%;
-    border-collapse: collapse;
-    border: 1px solid #ccc;
-    table-layout: fixed; /* Asegura que las celdas tengan un ancho fijo */
-    }
-    
 
-    .centered-table td {
-    padding: 8px;
-    border: 1px solid #ccc;
-    text-align: center;
-    }
-    
+/* Estilos para la tabla */
+.table-container {
+margin-top: 20px;
+display: flex;
+justify-content: center;
 
-    /* Agregar estilos de borde a la tabla */
-    .centered-table {
-    border: 2px solid #333;
-    }
-    
+}
 
-    .centered-table th,
-    .centered-table td {
-    border: 1px solid #ccc;
-    }
-    /* Estilos para el carrusel más pequeño */
-    .carousel-sm {
-    max-width: 400px; /* Ajusta el tamaño máximo del carrusel */
-    margin: 0 auto; /* Centra el carrusel horizontalmente */
-    }
-    
 
-    /* Estilos para las imágenes más pequeñas */
-    .carousel-inner img {
-    max-height: 300px; /* Ajusta el tamaño máximo de altura de las imágenes */
-    }
+.centered-table {
+width: 80%;
+border-collapse: collapse;
+border: 1px solid #ccc;
+table-layout: fixed; /* Asegura que las celdas tengan un ancho fijo */
+
+}
+
+
+.centered-table td {
+padding: 8px;
+border: 1px solid #ccc;
+text-align: center;
+}
+
+
+/* Agregar estilos de borde a la tabla */
+.centered-table {
+border: 2px solid #333;
+}
+
+
+.centered-table th,
+.centered-table td {
+border: 1px solid #ccc;
+padding: 10px;
+}
+/* Estilos para el carrusel más pequeño */
+.carousel-sm {
+max-width: 1060px; /* Ajusta el tamaño máximo del carrusel */
+margin: 0 auto; /* Centra el carrusel horizontalmente */
+}
+
+
+/* Estilos para las imágenes más pequeñas */
+.carousel-inner img {
+max-height: 500px; /* Ajusta el tamaño máximo de altura de las imágenes */
+}
+
+h1{
+    margin-bottom: 70px;
+    font-weight: bold;
+}
+
+#parrafos{
+    margin-left: 280px;
+    margin-right: 280px;
+    margin-bottom: 50px;
+    margin-top: 50px;
+}
+#parrafos p{
+    text-align: justify;
+}
+.centered-table img{
+    width: 200px;
+    padding: 10px;
+    border-radius: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+    margin-bottom: 15px;
+}
+.centered-table p{
+    margin-top: 10px;
+    font-weight: bold;
+}

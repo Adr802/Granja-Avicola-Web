@@ -38,6 +38,8 @@ const io = require('socket.io')(server,{
 app.set('nombreApp', 'Aplicacion para la gestion de una granja Avicola'); 
 app.set('puerto',process.env.PORT|| 3000);
 
+app.use(cors());
+
 app.use(express.json());
 
 //middleware
@@ -139,10 +141,8 @@ crearUser();
 const crearWaterEvent = () =>{
   WaterPump.create(
       {
-        dateHour:{
-          hour:"11:18",
-          date:"17/07/2023"
-      }
+        hour:"11:18",
+        date:"17/07/2023"
       }
   )
   console.log("evento waterpump creada?")

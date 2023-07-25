@@ -18,9 +18,7 @@ const UserScheme = new mongoose.Schema({
         type: ["operator", "admin"],
         default: "operator"
     },
-    sesion: {
-        email: { type: String, require: true, unique: true },
-        pass: { type: String, require: true }
-    }
+    email: { type: String, require: true, unique: true },
+    pass: { type: String, require: true }
 });
 module.exports = mongoose.model('User', UserScheme);

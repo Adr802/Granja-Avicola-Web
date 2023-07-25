@@ -1,14 +1,25 @@
-<div class="content">
-    <section id="login">
-        <h2>Iniciar sesión</h2>
-        <form>
-            <label for="username">Nombre de usuario:</label>
-            <input type="text" id="username" name="username" placeholder="Ingrese su nombre de usuario">
+<section id="inicio">
+    <div class="row">
+        <div class="col-md-4 mx-auto">
+            <div class="card">
+                <div class="card-header">
+                    Iniciar Sesion
+                </div>
+                <div class="card-body">
+                    <form (submit)="signIn()">
+                        <div class="form-group">
+                            <label>Email:</label>
+                            <input type="text" [(ngModel)]="user.email" name="email" class="form-control" required="true" autofocus="true">
+                        </div>
+                        <div class="form-group">
+                            <label>Contraseña:</label>
+                            <input type="text" [(ngModel)]="user.password" name="email" name="password" class="form-control"  required="true">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Ingresar</button>
+                    </form>
+                </div>
+            </div>
+        </div>    
+    </div>
+</section>
 
-            <label for="password">Contraseña:</label>
-            <input type="password" id="password" name="password" placeholder="Ingrese su contraseña">
-
-            <button type="submit">Iniciar sesión</button>
-        </form>
-    </section>
-</div>
