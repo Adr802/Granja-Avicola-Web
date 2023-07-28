@@ -1,33 +1,24 @@
 <div class="content">
     <section id="inicio">
         <h1>¡Bienvenido a la Granja Avícola Los Mijos!</h1>
-        <div id="carouselExampleIndicators" class="carousel slide carousel-sm">
-            <div class="carousel-indicators">
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-            </div>
-            <div class="carousel-inner">
-                <div class="carousel-item active">
+        <div class="carousel">
+            <div class="slides">
+              <div class="slide active">
                 <img src="assets/pollo3.jpg" class="d-block w-100" alt="Pollo levantado">
-                </div>
-                <div class="carousel-item">
+              </div>
+              <div class="slide">
                 <img src="assets/pollo2.jpg" class="d-block w-100" alt="Muchos pollos">
-                </div>
-                <div class="carousel-item">
+              </div>
+              <div class="slide">
                 <img src="assets/pollo.jpg" class="d-block w-100" alt="criadero de pollos">
-                </div>
+              </div>
+              <!-- Agregar más diapositivas según sea necesario -->
             </div>
-            <br>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-            </button>
-        </div>
+          
+            <button class="prev" (click)="prevSlide()">&#10094;</button>
+            <button class="next" (click)="nextSlide()">&#10095;</button>
+          </div>
+          
         
         <div id="parrafos">
             <p>En la Granja Avícola Los Mijos, nos enorgullecemos de ofrecer un entorno excepcional para la crianza de aves de corral,

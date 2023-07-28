@@ -78,3 +78,45 @@ h1{
     margin-top: 10px;
     font-weight: bold;
 }
+
+.carousel {
+    position: relative;
+    width: 100%;
+    max-width: 800px; /* Ajusta el ancho según tus necesidades */
+    margin: 0 auto;
+    overflow: hidden;
+  }
+  
+  .slides {
+    display: flex;
+    transition: transform 0.5s ease;
+  }
+  
+  .slide {
+    flex: 0 0 100%;
+    width: 100%;
+  }
+  
+  .prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+    padding: 10px;
+  }
+  
+  .prev {
+    left: 0;
+  }
+  
+  .next {
+    right: 0;
+  }
+  
+  /* Para ocultar las flechas cuando no haya más diapositivas */
+  .prev.disabled, .next.disabled {
+    pointer-events: none;
+    opacity: 0.5;
+  }
+  

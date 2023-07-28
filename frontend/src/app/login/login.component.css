@@ -1,17 +1,47 @@
-.card{
-    width: 460px;
-    height: 375px;
-}
-.card-header{
-    font-size: 20px;
+/* Estilos para el formulario */
+.card {
+    width: 360px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    margin: 0 auto; /* Centrar horizontalmente */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .card-header {
     font-weight: bold;
-    padding: 15px;
-}
-.form-group{
-    margin-bottom: 20px;
-}
-.btn-primary{
-    padding: 15px;
-    width: 150px;
-    height: 60px;
-}
+    background-color: #f2f2f2;
+    padding: 8px;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .form-control {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .btn-primary {
+    background-color: #007bff;
+    color: #fff;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%; /* Ajustar el ancho del botón al 100% del contenedor */
+    max-width: 150px; /* Establecer un ancho máximo para el botón */
+    margin-top: 15px; /* Espacio entre el formulario y el botón */
+  }
+  
