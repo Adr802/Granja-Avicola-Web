@@ -1,0 +1,33 @@
+.user-info {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    justify-content: end;
+  }
+  
+  .titles {
+    margin-right: 20px;
+  }
+  
+  .user-image-container {
+    display: flex;
+    align-items: flex-end;
+  }
+  
+  .user-image {
+    max-width: 100px; /* Cambia el valor según el tamaño deseado */
+  }
+  
+  .title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333; /* Cambia el color según tu preferencia */
+    margin: 0; /* Asegura que no haya espacio entre los títulos */
+  }
+  
+  .subtitle {
+    font-size: 18px;
+    color: #666; /* Cambia el color según tu preferencia */
+    margin: 0; /* Asegura que no haya espacio entre los títulos */
+  }
+  

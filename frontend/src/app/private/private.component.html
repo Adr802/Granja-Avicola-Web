@@ -1,6 +1,22 @@
-<div class="block" *appRole="['operator']">
-    <app-dashboard></app-dashboard>
-</div>
-<div class="block" *appRole="['admin']">
-    <app-registro-usuarios></app-registro-usuarios>
-</div>
+<section id="inicio">
+    <div class="user-info">
+        <div class="titles">
+          <p class="title">Bienvenido {{userService.users.name}}</p>
+          <p class="subtitle">Rol: {{userService.users.role}}</p>
+        </div>
+        <div class="user-image-container">
+          <img src="../../assets/user.png" class="user-image">
+        </div>
+      </div>
+      
+      
+   
+   <div class="block" *appRole="['operator']">
+       <app-dashboard></app-dashboard>
+   </div>
+   <div class="block" *appRole="['admin']">
+       <app-registro-usuarios></app-registro-usuarios>
+   </div>
+   
+</section>
+

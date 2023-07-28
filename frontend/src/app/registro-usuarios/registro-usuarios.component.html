@@ -34,8 +34,33 @@
             <option value="admin">Administrador</option>
             </select>
             </div>
-            <input type="submit" value="Registrar">
+            <input type="submit" value="Registrar" id="btnRegister">
         </form>
     </div>
+    <div class="table-container">
+        <p>Lista de usuarios registrados</p>
+        <table class="custom-table">
+          <thead>
+            <tr>
+              <th>Cedula</th>
+              <th>Nombre</th>
+              <th>Correo</th>
+              <th>Telefono</th>
+              <th>Rol</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let user of userService.userss">
+              <td>{{user.cedula}}</td>
+              <td>{{user.name}}</td>
+              <td>{{user.email}}</td>
+              <td>{{user.phone}}</td>
+              <td>{{user.role}}</td>
+              <td><button class="custom-button" (click)="deleteUser(user._id)">Eliminar</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>    
 </section>
 

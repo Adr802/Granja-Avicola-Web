@@ -12,11 +12,13 @@ export class AuthService {
     this.selectedUser = new User();
   }
   signUp(user:User){
-      console.log("estoyy en el servicio: " + user.cedula)
       return this.http.post<any>(this.URL + '/registro', user);
   }
   signIn(user:any){
     return this.http.post<any>(this.URL + '/ingreso', user);
+  }
+  deleteUser(id:String){
+    return this.http.delete<any>(this.URL + `/eliminar/${id}`);
   }
 
   loggedIn(): Boolean{

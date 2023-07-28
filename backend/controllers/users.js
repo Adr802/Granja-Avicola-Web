@@ -26,8 +26,6 @@ const userController = {
             });
     },
     addUser: async (req, res) => {
-        console.log(req.body);
-
         const { cedula, name, phone, rol, email, pass } = req.body;
         const newUser = new User({
             cedula: cedula,
@@ -56,6 +54,20 @@ const userController = {
 
         const token = jwt.sign({ _id: user._id }, 'secretkey');
         res.status(200).json({ token })
+    },
+    deleteUser : async (req, res) =>{
+        const userId = req.params.id;
+        const objectId = new mongoose.Types.ObjectId(userId);
+        User.findByIdAndDelete(objectId)
+        .then((user) => {
+            if (!user) {
+                return res.status(404).json({ message: 'Usuario no encontrado' });
+            }
+            return res.json({ message: 'Usuario eliminado correctamente.', deletedUser });
+        })
+        .catch((err) => {
+            return res.status(200).json({ message: 'Error en el servidor', error: err });
+        });       
     }
 }
 
