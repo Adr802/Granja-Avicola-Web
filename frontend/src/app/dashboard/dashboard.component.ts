@@ -11,7 +11,7 @@ Chart.register(...registerables);
 export class DashboardComponent implements OnInit {
 
   // Move the socket declaration inside the class
-  private socket = io("http://localhost:3000");
+  private socket = io("http://192.168.1.36:3000");
   public chart: any;
   public chart2: any;
   public currentWaterLevel: number = 100; // Inicialmente el nivel de agua es 0

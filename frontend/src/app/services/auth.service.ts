@@ -7,7 +7,7 @@ import { User } from '../models/user';
 })
 export class AuthService {
   selectedUser: User;
-  private URL = 'http://localhost:3000/api/users'
+  private URL = 'http://192.168.1.36:3000/api/users'
   constructor(private http: HttpClient, private router: Router) { 
     this.selectedUser = new User();
   }

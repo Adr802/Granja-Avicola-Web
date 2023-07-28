@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { Observable } from 'rxjs'
 import * as io from 'socket.io-client'
-const backendUrl = 'http://localhost:3000';
+const backendUrl = 'http://192.168.1.36:3000';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +11,7 @@ export class SocketServiceService {
 
    //private clientSocket: socketIo.Socket;
   socket:any;
-  url:string = "http://localhost:3000"
+  url:string = "http://192.168.1.36:3000"
   constructor() { 
     //this.clientSocket = socketIo.connect(backendUrl)
     this.socket = io.connect(this.url);
