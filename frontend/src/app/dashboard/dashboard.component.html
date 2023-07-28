@@ -1,5 +1,5 @@
 <section id="inicio">
-  <p id="title">Graficas en tiempo real</p>
+  <p id="title">Dashboard en tiempo real</p>
   <div class="dashboard-container">
     <!-- Contenedor de los dashboards de la izquierda -->
     <div class="left-dashboard-container left-right-margin">
@@ -21,8 +21,35 @@
         <div class="water-tank">
           <div class="water" [style.height.%]="currentWaterLevel"></div>
         </div>
-        <img src="assets/2-removebg-preview.png" alt="Imagen" class="overlay-image">
         <div class="water-level">{{ currentWaterLevel }}%</div>
+      </div>
+    </div>
+  </div>
+
+  <p id="title2">Dashboard histórico</p>
+  <div class="dashboard-container2">
+    <!-- Contenedor de los dashboards de la izquierda -->
+    <div class="left-dashboard-container2 left-right-margin2">
+      <div class="dashboard-item2 horizontal2">
+        <div class="chart-container2">
+          <canvas id="chart4" style="height: 500px; width: 1550px;"></canvas>
+        </div>
+      </div>
+      <div class="dashboard-item2 horizontal2">
+        <div class="chart-container2">
+          <canvas id="chart5" style="height: 500px; width: 1550px;"></canvas>
+        </div>
+      </div>
+    </div>
+    <!-- Dashboard de la derecha -->
+    <div id = "vertical">
+      <div class="itemVertical" id="arriba">
+        <p>Descargar Informe</p>
+        <button id="btnEnviar" (click)="saveReport()">Descargar</button>
+      </div>
+      <div class="itemVertical" id="abajo">
+        <p id="numt">Eventos de la bomba de agua</p>
+        <p id="num">{{eventosWater}}</p>
       </div>
     </div>
   </div>

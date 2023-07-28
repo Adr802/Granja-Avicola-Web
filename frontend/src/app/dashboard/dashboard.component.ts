@@ -1,5 +1,9 @@
+import { Data } from './../data';
 import { Component, OnInit } from '@angular/core';
 import { io } from 'socket.io-client';
+import { HttpClient } from '@angular/common/http';
+import { jsPDF } from "jspdf";
+import 'jspdf-autotable';
 import { Chart, registerables } from 'chart.js';
 Chart.register(...registerables);
 
@@ -11,15 +15,25 @@ Chart.register(...registerables);
 export class DashboardComponent implements OnInit {
 
   // Move the socket declaration inside the class
-  private socket = io("http://192.168.1.36:3000");
+  private socket = io("http://localhost:3000");
   public chart: any;
   public chart2: any;
+  public chart3: any;
+  public chart4: any;
+
+  public eventosWater: any;
+  currentHour:any;
+
   public currentWaterLevel: number = 100; // Inicialmente el nivel de agua es 0
   temperatures: number[] = []; // Array para almacenar las temperaturas recibidas
   hours: string[] = []; // Array para almacenar las horas recibidas
   maxDataPoints = 10; // Máximo número de puntos de datos en el gráfico
   humedad: number[] = [];
-  constructor() {
+  chartData: any;
+  temperatures2: number[] = [];
+  dates: string[] = [];
+  humedads: string[]= [];
+  constructor(private http: HttpClient) {
     // send a message to the server
     this.socket.emit("hello from client");
 
@@ -33,6 +47,24 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.createChart();
     this.createChart2();
+    this.http.get<any>('http://localhost:3000/api/waterPump')
+    .subscribe(response => {
+      this.eventosWater = response.count; // Asignar el contenido de la respuesta a la variable 'data'
+    });
+    this.http.get<any[]>('http://localhost:3000/api/data/temperature')
+      .subscribe(data => {
+        this.chartData = data;
+        // Guardar los datos en la propiedad chartData
+        this.extractChartData(data);
+        this.createChart3();
+        this.dates = [];
+      });
+      this.http.get<any[]>('http://localhost:3000/api/data/humedad')
+      .subscribe(data => {
+        // Guardar los datos en la propiedad chartData
+        this.extractChartData(data);
+        this.createChart4();
+      });
   }
   createChart() {
     this.chart = new Chart("chart1", {
@@ -171,6 +203,129 @@ export class DashboardComponent implements OnInit {
       }
     });
   }
+  extractChartData(data:any): void {
+    for (const item of data) {
+      this.temperatures2.push(item.temp);
+      this.humedads.push(item.hum);
+      this.dates.push(item.dateHour.date);
+    }
+  }
+  createChart3(): void {
+    this.chart3= new Chart("chart4",{
+      type: 'bar', // this denotes the type of chart
+  
+      data: {
+        labels: this.dates,
+        datasets: [
+          {
+            data: this.temperatures2,
+          }
+        ]
+      },
+      
+      options: {
+        plugins: {
+          title: {
+            display: true,
+            text: 'Temperaturas máximas', // Título del gráfico
+            font: {
+              size: 20, // Tamaño de fuente del título
+              weight: 'bold' // Grosor del título (normal, bold, etc.)
+            }
+          },
+          legend: {
+            display: false, // Ocultar la leyenda completa
+          }
+        },
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: 'Dia', // Título del eje X
+              font: {
+                size: 15 // Tamaño de fuente del título del eje X
+              }
+            },
+            grid: {
+              color: 'rgba(0, 0, 0, 0.1)' // Color de las líneas verticales del fondo (en formato RGBA)
+            }
+          },
+          y: {
+            title: {
+              display: true,
+              text: 'Temperaturas', // Título del eje Y
+              font: {
+                size: 15 // Tamaño de fuente del título del eje Y
+              }
+            },
+            grid: {
+              color: 'rgba(0, 0, 255, 0.1)' // Color de las líneas horizontales del fondo (en formato RGBA)
+            },
+
+          }
+        }        
+      }
+    });
+  }
+  createChart4(): void {
+    this.chart4= new Chart("chart5",{
+      type: 'bar', // this denotes the type of chart
+  
+      data: {
+        labels: this.dates,
+        datasets: [
+          {
+            data: this.humedads,
+          }
+        ]
+      },
+      
+      options: {
+        plugins: {
+          title: {
+            display: true,
+            text: 'Humedades máximas', // Título del gráfico
+            font: {
+              size: 20, // Tamaño de fuente del título
+              weight: 'bold' // Grosor del título (normal, bold, etc.)
+            }
+          },
+          legend: {
+            display: false, // Ocultar la leyenda completa
+          }
+        },
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: 'Dia', // Título del eje X
+              font: {
+                size: 15 // Tamaño de fuente del título del eje X
+              }
+            },
+            grid: {
+              color: 'rgba(0, 0, 0, 0.1)' // Color de las líneas verticales del fondo (en formato RGBA)
+            }
+          },
+          y: {
+            title: {
+              display: true,
+              text: 'Humedad', // Título del eje Y
+              font: {
+                size: 15 // Tamaño de fuente del título del eje Y
+              }
+            },
+            grid: {
+              color: 'rgba(0, 0, 255, 0.1)' // Color de las líneas horizontales del fondo (en formato RGBA)
+            },
+
+          }
+        }        
+      }
+    });
+  }
+
+
   updateChart(data: any) {
     // Obtener la hora y temperatura desde los datos recibidos
     const hour = data.dateHour.hour;
@@ -198,5 +353,49 @@ export class DashboardComponent implements OnInit {
     // Actualizar el gráfico
     this.chart.update();
     this.chart2.update();
+  }
+
+  saveReport() {
+    const date = new Date();
+    this.currentHour = date.toLocaleTimeString();
+    
+    // Agregar la tabla al PDF
+ 
+
+    
+    const doc = new jsPDF();
+    
+    // Encabezado del PDF
+    doc.setFontSize(18);
+    doc.setFontSize(20);
+    doc.text("Granja Avicola Los Mijos", 15, 15);
+    doc.text("Reporte historico", 15, 25);
+    // Información de la factura
+    doc.setFontSize(12);
+    
+    const data = this.chartData; // Suponiendo que aquí tienes los datos cargados en el dashboard
+    const tableData = this.generateTable(data);
+    (doc as any).autoTable({
+      head: [['Fecha', 'Temperatura', 'Humedad']],
+      body: tableData,
+      startY: 60
+    });
+
+    // Total Valor Final
+    // Guardar el PDF
+    doc.save(this.currentHour  + '.pdf');
+  }
+  
+  generateTable(data: any[]): any[][] {
+    const tableData: any[][] = [];
+  
+    // Agregar fila de encabezados de la tabla
+  
+    // Agregar filas de datos
+    for (const item of data) {
+      tableData.push([item.dateHour.date, item.temp, item.hum]);
+    }
+    console.log(tableData)
+    return tableData;
   }
 }

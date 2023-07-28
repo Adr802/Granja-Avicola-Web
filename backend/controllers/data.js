@@ -1,17 +1,25 @@
 const Data = require('../models/data');
 
 const dataController = {
-    getDatas : async (req,res) => {
-        const data = await Data.find();
-        res.json(data)
-        
-        /*await Data.find().then(docs => {
-            // Paso 5: Obtener los datos
-            //console.log(docs);
-            res.json(docs);
-        }).catch(err => {
-            console.error('Error al obtener los datos:', err);
-        });*/
+    getTemperature: async (req, res) => {
+        try {
+          // Obtener los datos ordenados por la temperatura de forma descendente y limitar a 10 resultados
+          const data = await Data.find().sort({ temp: -1 }).limit(10);
+          res.json(data);
+        } catch (err) {
+          console.error('Error al obtener los datos:', err);
+          res.status(500).json({ error: 'Error al obtener los datos desde la base de datos.' });
+        }
+    },
+    getHumedad: async (req, res) => {
+        try {
+          // Obtener los datos ordenados por la temperatura de forma descendente y limitar a 10 resultados
+          const data = await Data.find().sort({ hum: -1 }).limit(10);
+          res.json(data);
+        } catch (err) {
+          console.error('Error al obtener los datos:', err);
+          res.status(500).json({ error: 'Error al obtener los datos desde la base de datos.' });
+        }
     }
 }
 
